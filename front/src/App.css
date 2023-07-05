@@ -1,0 +1,67 @@
+.footerBackground{
+  background-color: #2b2d42;
+}
+
+.App {
+  text-align: center;
+  padding: 10%;
+  background-color: #2b2d42;
+} 
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pepito {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-form {
+  box-shadow: 10px 10px 10px rgba(46, 248, 160, 0.3);
+  font-size: 1.2em;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.button-card {
+  box-shadow: 10px 10px 10px rgba(46, 248, 160, 0.3);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande";
+}
+.pink-shadow {
+  box-shadow: 10px 10px 10px #f82d97;
+}
+
+.admin {
+  height: 500px;
+}
