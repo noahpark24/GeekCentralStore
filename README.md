@@ -12,7 +12,7 @@ Este proyecto fue desarrollado en equipo durante 2 semanas. Puedes encontrar el 
    - `DB_HOST`: Escribir localhost.
    - `SERVER_PORT`: Número del puerto en el cual deseas iniciar el servidor.
 
-## Acceso a la documentación de la API:
+## Acceso a la documentación de la API (en desarrollo):
 
 Seguir estos pasos para acceder a la documentación de la API:
 
