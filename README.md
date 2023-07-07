@@ -19,4 +19,3 @@ Seguir estos pasos para acceder a la documentación de la API:
 1. Navega hasta la carpeta "back" y ejecuta el comando `npm start` en la terminal para iniciar el servidor.
 
 2. En tu navegador web, escribe la siguiente URL: `localhost:<SERVER_PORT>/api-doc/`.
-   /.

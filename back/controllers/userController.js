@@ -9,6 +9,7 @@ const {
   deleteUserAccount,
 } = require("../services/userServices");
 const { getUserShoppingCart } = require("../services/shoppingCartServices");
+const { generateToken } = require("../config/token");
 
 exports.signup_user = asyncHandler(async (req, res, next) => {
   try {
@@ -30,23 +31,28 @@ exports.signup_user = asyncHandler(async (req, res, next) => {
 
 exports.login_user = asyncHandler(async (req, res, next) => {
   try {
-    let { nickname } = req.body;
-    let searchedUser = await searchUser(nickname);
+    let { nickname, password } = req.body;
+    let user = await searchUser(nickname);
 
-    let validatedUser = await validateUserPassword(searchedUser);
-    const payload = {
-      email: validatedUser.email,
-      nickname: validatedUser.nickname,
-      is_admin: validatedUser.is_admin,
-    };
+    let validatedPassword = await user.validatePassword(password);
 
-    let userCookie = await generateCookie(payload);
+    if (validatedPassword) {
+      const payload = {
+        email: user.email,
+        nickname: user.nickname,
+        is_admin: user.is_admin,
+      };
 
-    res.cookie("token", userCookie);
+      let userCookie = generateToken(payload);
 
-    res.status(200).send(payload);
+      res.cookie("token", userCookie);
+
+      res.status(200).send(payload);
+    } else {
+      res.send("wrong password or user_name");
+    }
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 });
 

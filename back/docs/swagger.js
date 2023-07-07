@@ -6,7 +6,7 @@ const options = {
     info: {
       title: "API De Geek Central Store",
       description:
-        "Esta API se encarga de manejar los datos en nuestra base de datos",
+        "Esta API se encarga de manejar los datos en Geek Central Store",
       version: "1.0.0",
     },
   },
