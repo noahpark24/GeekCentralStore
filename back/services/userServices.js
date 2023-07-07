@@ -19,26 +19,6 @@ exports.createUser = async (userData) => {
   }
 };
 
-exports.validateUserPassword = async (user) => {
-  try {
-    let validatedUser = user.validatePassword(user.password);
-    if (validatedUser) {
-      return user;
-    }
-  } catch (error) {
-    throw Error(error);
-  }
-};
-
-exports.generateCookie = async (payload) => {
-  try {
-    let cookie = generateToken(payload);
-    return cookie;
-  } catch (error) {
-    throw Error(error);
-  }
-};
-
 exports.updateUserData = async (userChanges, nickname) => {
   try {
     let updatedUser = await Users.update(userChanges, {
