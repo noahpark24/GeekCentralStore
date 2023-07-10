@@ -2,6 +2,8 @@
 
 Este proyecto fue desarrollado en equipo durante 2 semanas. Puedes encontrar el repositorio original en [este enlace](https://github.com/NahuelVenerus/GeekCentralStore).
 
+##El proyecto se encuentra en proceso de re-estructuracion completa
+
 ## Pasos a seguir para el correcto funcionamiento de la API:
 
 1. Crea una base de datos local utilizando el comando `createdb <nombre-de-la-db>`.
