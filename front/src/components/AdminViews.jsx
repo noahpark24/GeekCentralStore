@@ -1,82 +1,61 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { BASE_ROUTE } from "../rutas";
 import { setUserList } from "../state/usersList";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
+import { getAllUsers } from "../services/admin/getAllUsers";
+import "./styles/AdminViews.css";
 
 const AdminViews = () => {
   const dispatch = useDispatch();
-  const handleShowUsers = () => {
-    axios
-      .get(`${BASE_ROUTE}/api/admin/get-users`)
-      .then((res) => dispatch(setUserList(res.data)));
+
+  const handleShowUsers = async () => {
+    const usersData = await getAllUsers();
+    dispatch(setUserList(usersData));
   };
 
   return (
-    <Container className="container-fluid">
-      <Row className="d-flex justify-content-center">
-        <Col md={4} className="mb-4 d-flex justify-content-center">
+    <Container className="d-flex align-items-center justify-content-center vh-100">
+      <Row className="justify-content-center">
+        <Col
+          md={4}
+          sm={6}
+          xs={12}
+          className="mb-4 d-flex justify-content-center"
+        >
           <Link to="/admin-products" className="card-link">
-            <Card style={{ width: "18rem" }}>
-              <Button
-                className="admin-button"
-                style={{
-                  height: "500px",
-                  fontSize: "300%",
-                  width: "100%",
-                }}
-              >
-                Productos
-              </Button>
+            <Card className="admin-cards">
+              <Button className="products-button">Productos</Button>
               <Card.Text>
                 Aquí puedes ver, editar y eliminar los productos!
               </Card.Text>
             </Card>
           </Link>
         </Col>
-        <Col md={4} className="mb-4 d-flex justify-content-center">
-          <Link
-            to="/admin-order"
-            className="card-link"
-            style={{ textDecoration: "none" }}
-          >
-            <Card style={{ width: "18rem" }}>
-              <Button
-                className="admin-button"
-                style={{
-                  height: "500px",
-                  fontSize: "300%",
-                  backgroundColor: "#EF233C",
-                  width: "100%",
-                }}
-              >
-                Pedidos
-              </Button>
+        <Col
+          md={4}
+          sm={6}
+          xs={12}
+          className="mb-4 d-flex justify-content-center"
+        >
+          <Link to="/admin-order" className="card-link">
+            <Card className="admin-cards">
+              <Button className="orders-button">Pedidos</Button>
               <Card.Text>
                 Aquí puedes ver los pedidos de todos los usuarios!
               </Card.Text>
             </Card>
           </Link>
         </Col>
-        <Col md={4} className="mb-4 d-flex justify-content-center">
-          <Link
-            to="/admin/manage-users"
-            className="card-link"
-            style={{ textDecoration: "none" }}
-          >
-            <Card style={{ width: "18rem" }}>
-              <Button
-                className="admin-button"
-                style={{
-                  height: "500px",
-                  fontSize: "300%",
-                  backgroundColor: "#59cd90",
-                  width: "100%",
-                }}
-                onClick={handleShowUsers}
-              >
+        <Col
+          md={4}
+          sm={6}
+          xs={12}
+          className="mb-4 d-flex justify-content-center"
+        >
+          <Link to="/admin/manage-users" className="card-link">
+            <Card className="admin-cards">
+              <Button className="users-button" onClick={handleShowUsers}>
                 Administrar Usuarios
               </Button>
               <Card.Text>

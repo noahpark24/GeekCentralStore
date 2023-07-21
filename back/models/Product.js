@@ -16,6 +16,7 @@ Product.init(
     },
     total_sales: { type: Sequelize.INTEGER, defaultValue: 0 },
     category: { type: Sequelize.ARRAY(Sequelize.STRING), defaultValue: [] },
+    is_deleted: { type: Sequelize.BOOLEAN, defaultValue: false },
   },
   { sequelize: db, modelName: "product" }
 );

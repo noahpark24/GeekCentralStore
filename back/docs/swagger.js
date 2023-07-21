@@ -15,7 +15,10 @@ const options = {
       url: "http://localhost:3001",
     },
   ],
-  apis: [path.resolve(__dirname, "./user-routes.js")],
+  apis: [
+    path.resolve(__dirname, "./user-routes.js"),
+    path.resolve(__dirname, "./product-routes.js"),
+  ],
 };
 
 module.exports = options;

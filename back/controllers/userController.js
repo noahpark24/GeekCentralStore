@@ -1,14 +1,14 @@
 const asyncHandler = require("express-async-handler");
 const {
   searchUser,
-  validateUserPassword,
-  generateCookie,
   createUser,
   updateUserData,
   getAllUsers,
   deleteUserAccount,
 } = require("../services/userServices");
-const { getUserShoppingCart } = require("../services/shoppingCartServices");
+
+const { getUserCart, createShoppingCart } = require("../services/cartServices");
+
 const { generateToken } = require("../config/token");
 
 exports.signup_user = asyncHandler(async (req, res, next) => {
@@ -22,6 +22,8 @@ exports.signup_user = asyncHandler(async (req, res, next) => {
     } else {
       let user_data = req.body;
       let newUser = await createUser(user_data);
+      await createShoppingCart(newUser);
+
       res.status(200).send(newUser);
     }
   } catch (error) {
@@ -77,17 +79,6 @@ exports.update_user_data = asyncHandler(async (req, res) => {
   }
 });
 
-exports.get_user_shopping_cart = asyncHandler(async (req, res) => {
-  try {
-    const { nickname } = req.params;
-    const user = await searchUser(nickname);
-    let userShoppingCart = await getUserShoppingCart(user.id);
-    res.status(200).send(userShoppingCart);
-  } catch (error) {
-    throw Error(error);
-  }
-});
-
 exports.see_all_users = asyncHandler(async (req, res) => {
   try {
     let signedUpUsers = await getAllUsers();
@@ -100,8 +91,10 @@ exports.see_all_users = asyncHandler(async (req, res) => {
 exports.delete_user_account = asyncHandler(async (req, res) => {
   try {
     const { nickname } = req.params;
+
     await deleteUserAccount(nickname);
-    res.sendStatus(200);
+
+    res.sendStatus(201);
   } catch (error) {
     throw Error(error);
   }

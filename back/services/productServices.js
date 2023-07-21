@@ -1,4 +1,3 @@
-const { Op } = require("sequelize");
 const { Product } = require("../models");
 
 exports.addNewProduct = async (productData) => {
@@ -19,6 +18,22 @@ exports.getProduct = async (idProduct) => {
   }
 };
 
+exports.addSeederProducts = async (productData) => {
+  try {
+    const existingProducts = await Product.findAll();
+    if (existingProducts.length === 0) {
+      await Product.bulkCreate(productData);
+      console.log("Seeding complete!");
+      return;
+    } else {
+      console.log("Products already exist in the database.");
+      return;
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 exports.getAllProducts = async () => {
   try {
     let productsOnStock = await Product.findAll();
@@ -28,26 +43,13 @@ exports.getAllProducts = async () => {
   }
 };
 
-exports.getProductsByName = async (name) => {
-  try {
-    const searchedProducts = await Product.findAll({
-      where: {
-        name: {
-          [Op.iLike]: `%${name}%`,
-        },
-      },
-    });
-    return searchedProducts;
-  } catch (error) {
-    throw Error(error);
-  }
-};
-
 exports.deleteProduct = async (id) => {
   try {
-    await Product.destroy({
-      where: { id: id },
-    });
+    const product = await this.getProduct(id);
+
+    product.is_deleted = true;
+
+    await product.save();
   } catch (error) {
     throw Error(error);
   }

@@ -1,20 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { setUser } from "../state/user";
-import axios from "axios";
-import { BASE_ROUTE } from "../rutas";
+import { Link, useNavigate } from "react-router-dom";
+import { Navbar, Nav, Dropdown } from "react-bootstrap";
+import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/esm/Button";
+import Searcher from "../commons/Searcher";
+import geekLogo from "../assets/geekLogo.png";
+import "./styles/navbar.css";
 
-import Searcher from "./Searcher";
-
-function Navbar() {
+const CustomNavbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
-  const handleLogOut = (e) => {
+  const handleUserClick = () => {
+    if (!user.nickname) {
+      navigate("/login");
+    }
+  };
+
+  const handleLogout = (e) => {
     e.preventDefault();
     axios
       .get(`${BASE_ROUTE}/api/users/logout`, { withCredentials: true })
@@ -25,61 +29,75 @@ function Navbar() {
       .catch((error) => console.error(error));
   };
 
-  const handleHome = () => {
-    navigate("/");
-  };
-
   return (
-    <nav className={"navbar navbar-expand-md navbar-dark fixed-top bg-black"}>
-      <div className={"container-fluid"}>
-        <a class="navbar-brand">
-          <Link to="/">
-            <img
-              src="geekLogo.png"
-              alt="Geek Central Logo"
-              width="300px"
-              height="74.05px"
-              onClick={handleHome}
-            />
-          </Link>
-        </a>
-        <Searcher />
-        {user.nickname ? (
-          <div className={"d-flex justify-content-end"}>
-            <Link to={`/shopping-cart/${user.nickname}`}>
-              <Button
-                style={{ backgroundColor: "#EF233C", borderColor: "#EF233C" }}
-              >
-                <img src="cart.png" alt="cart" width="30px" height="30px" />
-              </Button>
-            </Link>
-            <Link to="/logout">
-              <button
-                type="button"
-                className={"btn btn-outline-danger"}
-                onClick={handleLogOut}
-              >
-                Logout
-              </button>
-            </Link>
+    <>
+      <Navbar
+        className="navbar-father"
+        bg="black"
+        variant="dark"
+        expand="md"
+        fixed="top"
+      >
+        <Navbar.Brand as={Link} to="/">
+          <img
+            src={geekLogo}
+            alt="Geek Central Logo"
+            width="300vh"
+            height="60vh"
+          />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbar-nav" />
+        <Navbar.Collapse id="navbar-nav" className="justify-content-end">
+          <div className="d-flex mx-auto">
+            <Searcher />
           </div>
-        ) : (
-          <div>
-            <Link to="/login">
-              <button type="button" className={"btn btn-outline-danger"}>
-                Login
-              </button>
-            </Link>
-            <Link to="/signup">
-              <button type="button" className={"btn btn-outline-danger"}>
-                Signup
-              </button>
-            </Link>
-          </div>
-        )}
-      </div>
-    </nav>
+          <Nav style={{ marginRight: "2vw" }}>
+            <Dropdown align={{ lg: "start" }}>
+              <Dropdown.Toggle
+                as={CustomToggle}
+                id="user-dropdown"
+                onClick={handleUserClick}
+              >
+                <FaUser size={30} />
+              </Dropdown.Toggle>
+              <Dropdown.Menu
+                align={{ lg: "start" }}
+                className="dropdown-menu-right"
+              >
+                <Dropdown.Item as={Link} to="/profile">
+                  Perfil
+                </Dropdown.Item>
+                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Nav>
+          <Nav style={{ marginRight: "2vw" }}>
+            <Nav.Link
+              as={Link}
+              to={user.nickname ? `/cart/:${user.nickname}` : "/login"}
+            >
+              <FaShoppingCart size={40} />
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </>
   );
-}
+};
 
-export default Navbar;
+// Componente personalizado para el toggle del Dropdown
+const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+  <a
+    href="/"
+    ref={ref}
+    onClick={(e) => {
+      e.preventDefault();
+      onClick(e);
+    }}
+    className="nav-link"
+  >
+    {children}
+  </a>
+));
+
+export default CustomNavbar;
