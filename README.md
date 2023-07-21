@@ -21,3 +21,18 @@ Seguir estos pasos para acceder a la documentación de la API:
 1. Navega hasta la carpeta "back" y ejecuta el comando `npm start` en la terminal para iniciar el servidor.
 
 2. En tu navegador web, escribe la siguiente URL: `localhost:<SERVER_PORT>/api-doc/`.
+
+## Mis aportes 
+
+- Implementación de Async/Await para manejar promesas de forma asincrónica.
+- Implementación de Controllers y Services para modularizar y organizar la lógica de negocio.
+- Implementación de Try/Catch en la API para manejar errores de manera adecuada.
+- Documentación de la API para facilitar el entendimiento y uso de los endpoints.
+- Rutas para gestionar usuarios, administradores y órdenes.
+- Modelos definidos para usuarios, órdenes y carritos.
+- Reestructuración de las relaciones en la API para mejorar la eficiencia y organización.
+- Reestructuración de carpetas del frontend para mantener una estructura limpia y ordenada.
+- Implementación de Soft Delete para marcar registros como eliminados sin borrarlos físicamente.
+- Creación de la NavBar para una mejor navegación en el frontend.
+- Vista de administrador para gestionar usuarios y órdenes.
+- Seeder de productos falsos para poblar la base de datos con datos de prueba.
