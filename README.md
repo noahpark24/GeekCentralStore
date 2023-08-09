@@ -13,6 +13,12 @@ Este proyecto fue desarrollado en equipo durante 2 semanas. Puedes encontrar el 
    - `DB_NAME`: Nombre de la base de datos creada anteriormente.
    - `DB_HOST`: Escribir localhost.
    - `SERVER_PORT`: Número del puerto en el cual deseas iniciar el servidor.
+  
+## Pasos a seguir para correr el proyecto
+
+1. Descargar los repos y correr npm i en ambas carpetas
+2. Abrir dos terminales , una posicionada en back y otra en front
+3. En la terminal de back escribri npm start , en la del front escribir npm run dev
 
 ## Acceso a la documentación de la API (en desarrollo):
 
