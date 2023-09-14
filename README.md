@@ -30,6 +30,8 @@ Seguir estos pasos para acceder a la documentación de la API:
 
 ## Mis aportes 
 
+Mi Rol Fue Principalmente Backend Pero Tambien Participe En El Frontend Del Proyecto
+
 - Implementación de Async/Await para manejar promesas de forma asincrónica.
 - Implementación de Controllers y Services para modularizar y organizar la lógica de negocio.
 - Implementación de Try/Catch en la API para manejar errores de manera adecuada.
